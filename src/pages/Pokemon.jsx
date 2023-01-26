@@ -1,33 +1,19 @@
-import {
-    Box,
-    Chip,
-    List,
-    ListItem,
-    Paper,
-    Stack,
-    Typography,
-} from '@mui/material';
-import LinearProgress, {
-    linearProgressClasses,
-} from '@mui/material/LinearProgress';
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Box, List, ListItem, Paper, Stack, Typography } from '@mui/material';
+import LinearProgress from '@mui/material/LinearProgress';
+
 import Loading from '../components/Loading';
+import { useParams } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 
 const Pokemon = () => {
     const { pkm } = useParams();
 
-    const { data, loading, error } = useFetch(
+    const { data, loading } = useFetch(
         `https://pokeapi.co/api/v2/pokemon/${pkm}`
     );
 
     if (loading) {
         return <Loading />;
-    }
-
-    if (error) {
-        return <p>Error</p>;
     }
 
     return (
@@ -42,6 +28,7 @@ const Pokemon = () => {
         >
             <Stack
                 direction="row"
+                flexWrap="wrap"
                 sx={{ gap: '2rem', justifyContent: 'space-around' }}
             >
                 <Box
@@ -65,6 +52,7 @@ const Pokemon = () => {
                             data.sprites.other['official-artwork'].front_default
                         }
                         width="300"
+                        alt={data.name}
                     />
                     <Box
                         sx={{
@@ -96,7 +84,7 @@ const Pokemon = () => {
                     <List>
                         <Stack gap=".3em">
                             {data.stats.map((item) => (
-                                <>
+                                <Box key={item.stat.name}>
                                     <ListItem
                                         sx={{
                                             display: 'flex',
@@ -104,7 +92,7 @@ const Pokemon = () => {
                                             color: '#455a64',
                                             fontWeight: 'bold',
                                         }}
-                                        key={item.stat.name}
+                                        
                                     >
                                         <span style={{ flexGrow: '1' }}>
                                             {item.stat.name}
@@ -123,7 +111,7 @@ const Pokemon = () => {
                                                 : item.base_stat
                                         }
                                     />
-                                </>
+                                </Box>
                             ))}
                         </Stack>
                     </List>

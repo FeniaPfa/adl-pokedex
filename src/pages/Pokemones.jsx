@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 const Pokemones = () => {
     const navigate = useNavigate();
     const [inputValue, setInputValue] = useState('');
-    const { data, loading, error } = useFetch(
+    const { data, loading } = useFetch(
         'https://pokeapi.co/api/v2/pokemon?limit=898&offset=0'
     );
 
@@ -27,8 +27,7 @@ const Pokemones = () => {
                 icon: 'warning',
                 title: 'Oops...',
                 text: 'Debes seleccionar un Pokémon!',
-                
-                })
+            });
         }
         navigate(`/pokemones/${inputValue}`);
     };
@@ -42,7 +41,7 @@ const Pokemones = () => {
     return (
         <Container maxWidth="lg" sx={{ margin: '2rem auto' }}>
             <Stack sx={{ alignItems: 'center', gap: '2rem' }}>
-                <Typography variant='h2'>Selecciona un Pokémon</Typography>
+                <Typography variant="h2">Selecciona un Pokémon</Typography>
                 <Autocomplete
                     inputValue={inputValue}
                     onInputChange={(event, newInputValue) => {
