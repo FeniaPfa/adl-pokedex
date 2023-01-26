@@ -1,0 +1,85 @@
+.poketype{
+  padding: .1rem 1rem;
+  border-radius: .8rem;
+  font-weight: bold;
+}
+
+.normal{
+  background: #c9c9bd;
+}
+
+.flying{
+  background: #85aeff;
+}
+
+.poison{
+  background: #bc76ae;
+}
+
+.poison{
+  background: #bc76ae;
+}
+
+.electric{
+  background: #ffd759;
+}
+
+.ground{
+  background: #e5c976;
+}
+
+.fire{
+  background: #ff6849;
+}
+
+.fairy{
+  background:#ffbdff;
+}
+
+.bug{
+  background:#bcc949;
+}
+
+.grass{
+  background: #93d776;
+}
+
+.fighting{
+  background: #c97668;
+}
+
+.water{
+  background:#59aeff;
+}
+
+.psychic{
+  background: #ff76ae;
+}
+
+.rock{
+  background:#c9bd85;
+}
+
+.steel{
+  background: #bcbdc9;
+}
+
+.ice{
+  background: #93e5ff;
+}
+
+.ghost{
+  background: #8585c9;
+}
+
+.dragon{
+  background:#9385f2;
+}
+
+.dark{
+  background:#937668;
+}
+
+.swal2-styled.swal2-confirm{
+  background-color: #ff1744;
+}

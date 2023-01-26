@@ -1,3 +1,5 @@
+import { ThemeProvider } from '@mui/material';
+import { theme } from './theme';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -6,7 +8,7 @@ import Pokemones from './pages/Pokemones';
 
 function App() {
     return (
-        <div className="App">
+        <>
             <Navbar />
 
             <Routes>
@@ -14,7 +16,7 @@ function App() {
                 <Route path="/pokemones" element={<Pokemones />} />
                 <Route path="/pokemones/:pkm" element={<Pokemon />} />
             </Routes>
-        </div>
+        </>
     );
 }
 

@@ -1,51 +1,70 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useFetch } from '../hooks/useFetch';
-import pokeloading from '../assets/pokeloading.gif';
-import { Autocomplete, Button, TextField } from '@mui/material';
+import {
+    Autocomplete,
+    Button,
+    Container,
+    Stack,
+    TextField,
+    Typography,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../components/Loading';
+import Swal from 'sweetalert2';
 
 const Pokemones = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [inputValue, setInputValue] = useState('');
     const { data, loading, error } = useFetch(
-        'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
+        'https://pokeapi.co/api/v2/pokemon?limit=898&offset=0'
     );
 
     let pokemonList = [];
 
     const handleClick = () => {
-      navigate(`/pokemones/${inputValue}`)
-    }
+        if (!inputValue) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Debes seleccionar un Pokémon!',
+                
+                })
+        }
+        navigate(`/pokemones/${inputValue}`);
+    };
 
     if (loading) {
-        return (
-            <>
-                <img src={pokeloading} alt="" width="250" />
-                <p>Cargando pokemones...</p>
-            </>
-        );
+        return <Loading />;
     } else {
         pokemonList = data.results.map((item) => item.name);
     }
 
     return (
-        <>
-            <Autocomplete
-                inputValue={inputValue}
-                onInputChange={(event, newInputValue) => {
-                    setInputValue(newInputValue);
-                }}
-                blurOnSelect
-                options={pokemonList}
-                sx={{ width: 300 }}
-                renderInput={(params) => (
-                    <TextField {...params} label="Pokemones" />
-                )}
-            />
-            <Button variant='contained'
-            onClick={handleClick}
-            >Buscar</Button>
-        </>
+        <Container maxWidth="lg" sx={{ margin: '2rem auto' }}>
+            <Stack sx={{ alignItems: 'center', gap: '2rem' }}>
+                <Typography variant='h2'>Selecciona un Pokémon</Typography>
+                <Autocomplete
+                    inputValue={inputValue}
+                    onInputChange={(event, newInputValue) => {
+                        setInputValue(newInputValue);
+                    }}
+                    blurOnSelect
+                    options={pokemonList}
+                    sx={{ width: 300 }}
+                    renderInput={(params) => (
+                        <TextField {...params} label="Pokemones" />
+                    )}
+                />
+                <Button
+                    size="large"
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleClick}
+                >
+                    Ver Detalle
+                </Button>
+            </Stack>
+        </Container>
     );
 };
 
