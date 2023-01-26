@@ -1,19 +1,23 @@
-import { Box, List, ListItem, Paper, Stack, Typography } from '@mui/material';
-import LinearProgress from '@mui/material/LinearProgress';
-
-import Loading from '../components/Loading';
 import { useParams } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
+import Error from '../components/Error';
+import Loading from '../components/Loading';
+
+import { Box, List, ListItem, Paper, Stack, Typography } from '@mui/material';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const Pokemon = () => {
     const { pkm } = useParams();
 
-    const { data, loading } = useFetch(
+    const { data, loading, error } = useFetch(
         `https://pokeapi.co/api/v2/pokemon/${pkm}`
     );
 
     if (loading) {
         return <Loading />;
+    }
+    if (error) {
+        return <Error />;
     }
 
     return (
@@ -92,7 +96,6 @@ const Pokemon = () => {
                                             color: '#455a64',
                                             fontWeight: 'bold',
                                         }}
-                                        
                                     >
                                         <span style={{ flexGrow: '1' }}>
                                             {item.stat.name}

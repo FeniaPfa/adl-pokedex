@@ -1,7 +1,7 @@
 import { Box, Container, Stack, Typography } from '@mui/material';
 import pokeball from '../assets/pokeball.svg';
 
-const NotFound = () => {
+const Error = () => {
     return (
         <Container maxWidth="lg">
             <Stack mt="2rem" alignItems="center">
@@ -19,10 +19,12 @@ const NotFound = () => {
                         </span>
                     </Stack>
                 </Box>
-                <Typography variant="h2">Página no encontrada</Typography>
+                <Typography variant="h2">
+                    Ha habido un error en la petición
+                </Typography>
             </Stack>
         </Container>
     );
 };
 
-export default NotFound;
+export default Error;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useFetch } from '../hooks/useFetch';
+import { useNavigate } from 'react-router-dom';
 import {
     Autocomplete,
     Button,
@@ -8,14 +9,14 @@ import {
     TextField,
     Typography,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import Loading from '../components/Loading';
+import Error from '../components/Error';
 import Swal from 'sweetalert2';
 
 const Pokemones = () => {
     const navigate = useNavigate();
     const [inputValue, setInputValue] = useState('');
-    const { data, loading } = useFetch(
+    const { data, loading, error } = useFetch(
         'https://pokeapi.co/api/v2/pokemon?limit=898&offset=0'
     );
 
@@ -34,7 +35,11 @@ const Pokemones = () => {
 
     if (loading) {
         return <Loading />;
-    } else {
+    }
+    if (error) {
+        return <Error />;
+    }
+    if (!error && !loading) {
         pokemonList = data.results.map((item) => item.name);
     }
 
